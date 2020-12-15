@@ -32,14 +32,16 @@ namespace TicketSystemAPI.App_Start
                             type = "string",
                             name = "username",
                             required = false,
-                            @in = "formData"
+                            @in = "formData", 
+                            @default = "dev@smithovision.com"
                         },
                         new Parameter
                         {
                             type = "string",
                             name = "password",
                             required = false,
-                            @in = "formData"
+                            @in = "formData", 
+                            @default = "Pass1234!"
                         }
                     }
                 }
