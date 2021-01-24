@@ -20,11 +20,7 @@ namespace TicketSystemWeb.Library.Api
 
         }
 
-        //public APIHelper(ILoggedInUserModel loggedInUser)
-        //{
-        //    InitializeClient();
-        //    _loggedInUser = loggedInUser;
-        //}
+        
 
         public HttpClient ApiClient
         {
@@ -68,36 +64,22 @@ namespace TicketSystemWeb.Library.Api
             }
         }
 
-        public async Task GetLoggedInUserInfo(string token)
+        public void ClearHeaders()
+        {
+            _apiClient.DefaultRequestHeaders.Clear();
+            _apiClient.Dispose();
+        }
+
+
+
+        public void AddRequestHeaders(string token)
         {
             _apiClient.DefaultRequestHeaders.Clear();
             _apiClient.DefaultRequestHeaders.Accept.Clear();
             _apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _apiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer { token } ");
 
-            using (HttpResponseMessage response = await _apiClient.GetAsync("/api/User"))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsAsync<LoggedInUserModel>();
-                    _loggedInUser.CreatedDate = result.CreatedDate;
-                    _loggedInUser.EmailAddress = result.EmailAddress;
-                    _loggedInUser.FirstName = result.FirstName;
-                    _loggedInUser.LastName = result.LastName;
-                    _loggedInUser.Id = result.Id;
-                    _loggedInUser.Token = token;
-                }
-                else
-                {
-                    throw new Exception(response.ReasonPhrase);
-                }
-            }
 
-        }
-
-        public void LogOffUser()
-        {
-            _apiClient.DefaultRequestHeaders.Clear();
         }
     }
 }

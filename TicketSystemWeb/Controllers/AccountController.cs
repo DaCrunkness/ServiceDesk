@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TicketSystemWeb.Library.Api;
+using TicketSystemWeb.Library.Models;
 using TicketSystemWeb.Models;
 
 namespace TicketSystemWeb.Controllers
@@ -17,7 +18,7 @@ namespace TicketSystemWeb.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private APIHelper apiHelper = new APIHelper();
+        private APIHelper _apiHelper = new APIHelper();
 
         public AccountController()
         {
@@ -80,6 +81,8 @@ namespace TicketSystemWeb.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var results = await _apiHelper.Authenticate(model.Email, model.Password);
+                    var info = EstablishSession(results);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -150,7 +153,7 @@ namespace TicketSystemWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            using (HttpResponseMessage response = await apiHelper.ApiClient.PostAsJsonAsync("api/Account/Register", model))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("api/Account/Register", model))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -413,6 +416,22 @@ namespace TicketSystemWeb.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        private string EstablishSession(AuthenticatedUser user)
+        {
+            // parameter has access to email and token
+
+            // create session Id?
+            Session.Add("accessToken", user.Access_Token);
+            //Session.Add("username", user.UserName);
+
+            // make token accessible to rest of web mvc
+
+            var token = Session["accessToken"].ToString();
+
+            var sessionInfo = Session.SessionID.Trim();
+            return token;
         }
 
         #region Helpers

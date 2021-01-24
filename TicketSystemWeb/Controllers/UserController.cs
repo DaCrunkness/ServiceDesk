@@ -9,27 +9,27 @@ namespace TicketSystemWeb.Controllers
 {
     public class UserController : Controller
     {
-        private APIHelper apiHelper = new APIHelper();
+        //private APIHelper apiHelper = new APIHelper();
         // GET: User
         public ActionResult Index()
         {
             return View();
         }
 
-        public async Task<ActionResult> CreateUser(UserModel model)
-        {
-            using (HttpResponseMessage response = await apiHelper.ApiClient.PostAsJsonAsync("api/User/CreateAccount", model))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsAsync<UserModel>();
-                    return View(result);
-                }
-                else
-                {
-                    throw new Exception(response.ReasonPhrase);
-                }
-            }
-        }
+        //public async Task<ActionResult> CreateUser(UserModel model)
+        //{
+        //    using (HttpResponseMessage response = await apiHelper.ApiClient.PostAsJsonAsync("api/User/CreateAccount", model))
+        //    {
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var result = await response.Content.ReadAsAsync<UserModel>();
+        //            return View(result);
+        //        }
+        //        else
+        //        {
+        //            throw new Exception(response.ReasonPhrase);
+        //        }
+        //    }
+        //}
     }
 }
