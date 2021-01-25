@@ -26,5 +26,10 @@ namespace TicketSystemAPI.Controllers
                 }
             }
         }
+
+        public void GetAllTickets()
+        {
+
+        }
     }
 }
