@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[FileInfo]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] NVARCHAR(256) NOT NULL, 
+    [Extension] NVARCHAR(256) NOT NULL, 
+    [Path] NVARCHAR(256) NOT NULL, 
+    [Type] NVARCHAR(256) NOT NULL, 
+    [CreatedDate] DATETIME2 NOT NULL DEFAULT getutcdate()
+)

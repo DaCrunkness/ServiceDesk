@@ -1,0 +1,18 @@
+﻿@model TicketSystemWeb.Models.FileModel
+
+@{
+    ViewBag.Title = "File Handling";
+}
+
+<h2>Upload a file</h2>
+
+@using (Html.BeginForm("AddFile", "FileHandler", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+    <div class="filepad">
+        @Html.TextBox("UploadedFile", "", new { type = "file" })
+        <input type="submit" value="Submit" class="btn btn-default" />
+    </div>
+}
+
