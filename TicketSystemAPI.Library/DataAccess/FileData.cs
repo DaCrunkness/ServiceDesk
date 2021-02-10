@@ -25,7 +25,7 @@ namespace TicketSystemAPI.Library.DataAccess
             return SqlDataAccess.SaveData(sql, data);
         }
 
-        public List<FileModel> GetFileById(string Id)
+        public List<FileModel> GetFileById(int Id)
         {
             string sql = $"select * from dbo.FileInfo where Id = { Id };";
             return SqlDataAccess.LoadData<FileModel>(sql);

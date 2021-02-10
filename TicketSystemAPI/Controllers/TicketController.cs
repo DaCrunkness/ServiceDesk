@@ -8,55 +8,143 @@ using static TicketSystemAPI.Library.DataAccess.TicketData;
 namespace TicketSystemAPI.Controllers
 {
 
-    [RoutePrefix("api/Ticket")]
+    [RoutePrefix("api/Tickets")]
     public class TicketController : ApiController
     {
+        private int ticketBase = 1000;
+        private List<TicketModel> tickets = new List<TicketModel>();
+
+        public TicketController()
+        {
+            CreateTestTickets(40);
+        }
+
+
         [Route("CreateTicket")]
         public void CreateTicket(TicketModel model)
         {
             int recordsCreated = SubmitTicket(GetTicketNumber(), model.Creator, model.Summary, model.Detail);
         }
 
+        [Route("GetAllTickets")]
         public void GetAllTickets()
         {
 
         }
 
+        [Route("MyTickets")]
         public List<TicketModel> MyTickets()
         {
             // get logged in user tickets
             return new List<TicketModel>();
         }
 
+        [Route("ViewTicketsByGroup")]
         public List<TicketModel> ViewTicketsByGroup(string group)
         {
             // get tickets by user group
             return new List<TicketModel>();
         }
 
+        [Route("AddNote")]
         public void AddNote(string note)
         {
 
         }
 
+        [Route("ChangeTicketStatus")]
         public void ChangeTicketStatus()
         {
 
         }
 
+        [Route("AssignTicket")]
         public void AssignTicket()
         {
 
         }
 
-        public TicketModel SearchForTicket(string searchInput)
+        //public TicketModel SearchForTicket(string searchInput)
+        //{
+        //    return new TicketModel();
+        //}
+
+        //public TicketModel FindTicketByNumber(int ticketNumber)
+        //{
+        //    return new TicketModel();
+        //}
+
+        private void CreateTestTickets(int testAmount)
         {
-            return new TicketModel();
+            int NUM_OF_TICKETS = testAmount;
+            for (int i = 0; i < NUM_OF_TICKETS; i++)
+            {
+                tickets.Add(new TicketModel((ticketBase + i), TestTicketCreator(i), TestTicketType(i), TestTicketDetail(i)));
+            }
         }
 
-        public TicketModel FindTicketByNumber(int ticketNumber)
+        private string TestTicketCreator(int i)
         {
-            return new TicketModel();
+            string creator = "";
+
+
+            if (i % 2 == 0)
+            {
+                creator += "Developer";
+
+            }
+            else if (i % 3 == 0)
+            {
+                creator += "System 7777";
+            }
+            else if (i % 2 == 0 && i % 3 == 0)
+            {
+                creator += "Error 8888";
+            }
+
+            return creator;
+        }
+
+        private string TestTicketType(int i)
+        {
+            string ticketType = "";
+
+            if (i % 2 == 0)
+            {
+                ticketType += "User";
+
+            }
+            else if (i % 3 == 0)
+            {
+                ticketType += "System";
+            }
+            else
+            {
+                ticketType += "Error";
+            }
+
+            return ticketType;
+        }
+
+        private string TestTicketDetail(int i)
+        {
+            string ticketDetail = "";
+
+            if (i % 2 == 0)
+            {
+                ticketDetail += "User created ticket for such situation";
+
+            }
+            else if (i % 3 == 0)
+            {
+                ticketDetail += "Ticket created by System Id 7777";
+            }
+            else
+            {
+                ticketDetail += "Error code, reason phrase";
+            }
+
+            return ticketDetail;
         }
     }
 }

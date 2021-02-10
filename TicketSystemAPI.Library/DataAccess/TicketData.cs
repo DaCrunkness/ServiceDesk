@@ -10,10 +10,7 @@ namespace TicketSystemAPI.Library.DataAccess
         {
             TicketModel data = new TicketModel
             {
-                // set ticket number
-                TicketNumber = ticketNumber, // add logic to get number of tickets from database then add 1
-
-                // add ticket data
+                TicketNumber = ticketNumber, 
                 Creator = creator,
                 Summary = summary,
                 Detail = detail
@@ -23,9 +20,6 @@ namespace TicketSystemAPI.Library.DataAccess
                                          values (@TicketNumber, @Creator, @Summary, @Detail);";
             return SqlDataAccess.SaveData(sql, data);
         }
-
-       
-
 
         public static List<TicketModel> LoadTickets()
         {
