@@ -24,24 +24,7 @@ namespace TicketSystemAPI.Library.DataAccess
             return SqlDataAccess.SaveData(sql, data);
         }
 
-        public static int SubmitTicket(int ticketNumber, string creator, string summary, string detail, byte[] attachment)
-        {
-            TicketModel data = new TicketModel
-            {
-                // set ticket number
-                TicketNumber = ticketNumber, // add logic to get number of tickets from database then add 1
-
-                // add ticket data
-                Creator = creator,
-                Summary = summary,
-                Detail = detail,
-                Attachment = attachment
-            };
-
-            string sql = @"insert into dbo.Tickets (TicketNumber, Creator, Summary, Detail, Attachment)
-                                         values (@TicketNumber, @Creator, @Summary, @Detail @Attachment);";
-            return SqlDataAccess.SaveData(sql, data);
-        }
+       
 
 
         public static List<TicketModel> LoadTickets()
