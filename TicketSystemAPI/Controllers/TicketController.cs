@@ -7,23 +7,43 @@ using static TicketSystemAPI.Library.DataAccess.TicketData;
 
 namespace TicketSystemAPI.Controllers
 {
-
+    [Authorize]
     [RoutePrefix("api/Tickets")]
+
     public class TicketController : ApiController
     {
+        
         private int ticketBase = 1000;
         private List<TicketModel> tickets = new List<TicketModel>();
+        
 
         public TicketController()
         {
-            CreateTestTickets(40);
+            
+        }
+
+        [Route("SetupTestTickets")]
+        public void SetupTestTickets()
+        {
+            CreateTestTickets(1000);
+           
+
+       
+        int i = 1 + 1;
+        }
+
+        [Route("CreateDefaultTicket")]
+        public void CreateTicket()
+        {
+            int recordsCreated = SubmitTicket();
+            int i = 1;
         }
 
 
         [Route("CreateTicket")]
         public void CreateTicket(TicketModel model)
         {
-            int recordsCreated = SubmitTicket(GetTicketNumber(), model.Creator, model.Summary, model.Detail);
+            int recordsCreated = SubmitTicket(User.Identity.GetUserName(), model.Summary, model.Detail);
         }
 
         [Route("GetAllTickets")]
@@ -79,7 +99,8 @@ namespace TicketSystemAPI.Controllers
             int NUM_OF_TICKETS = testAmount;
             for (int i = 0; i < NUM_OF_TICKETS; i++)
             {
-                tickets.Add(new TicketModel((ticketBase + i), TestTicketCreator(i), TestTicketType(i), TestTicketDetail(i)));
+                //tickets.Add(new TicketModel((ticketBase + i), TestTicketCreator(i), TestTicketType(i), TestTicketDetail(i)));
+                //tickets.Add(new TicketModel((ticketBase + i), TestTicketCreator(i), TestTicketType(i), TestTicketDetail(i)));
             }
         }
 

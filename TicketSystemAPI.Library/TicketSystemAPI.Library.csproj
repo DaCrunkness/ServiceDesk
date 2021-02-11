@@ -45,10 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractBases\Ticket.cs" />
     <Compile Include="DataAccess\FileData.cs" />
     <Compile Include="DataAccess\TicketData.cs" />
     <Compile Include="DataAccess\UserData.cs" />
     <Compile Include="Helpers\ErrorHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\ITicketHelper.cs" />
+    <Compile Include="Helpers\TicketHelper.cs" />
     <Compile Include="Internal\DataAccess\SqlDataAccess.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\FileModel.cs" />
