@@ -4,6 +4,7 @@
     [Creator] NVARCHAR(128) NOT NULL, 
     [Type] NVARCHAR(50) NOT NULL, 
     [HasAttachment] NCHAR(10) NOT NULL,
+    [Status] NCHAR(10) NOT NULL,
     [UsersGroup] NVARCHAR(50) NOT NULL, 
     [Summary] NVARCHAR(500) NOT NULL, 
     [Detail] NVARCHAR(MAX) NOT NULL, 
