@@ -11,10 +11,8 @@ namespace TicketSystemAPI.Library.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Extension { get; set; }
-        public string Type { get; set; }
         public string Path { get; set; }
-        public byte[] Contents { get; set; }
-        public string ImageString { get; set; }
+        public string Type { get; set; }
         public DateTime CreatedDate { get; set; }
 
     }

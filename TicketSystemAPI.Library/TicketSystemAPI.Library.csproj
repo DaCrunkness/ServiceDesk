@@ -58,8 +58,10 @@
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\ErrorTicket.cs" />
     <Compile Include="Models\FileModel.cs" />
+    <Compile Include="Models\FileTicket.cs" />
     <Compile Include="Models\TicketModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserTicket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
