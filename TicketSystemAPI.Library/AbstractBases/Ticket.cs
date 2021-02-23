@@ -21,6 +21,19 @@ namespace TicketSystemAPI.Library.AbstractBases
         public DateTime CreatedDate { get; set; }
         public string LastModified { get; set; }
 
+        public Ticket(int ticketNumber, string creator, string type, bool hasAttachment, string status, string userGroup, string summary, string detail, DateTime createdDate, string lastModified)
+        {
+            TicketNumber = ticketNumber;
+            Creator = creator;
+            Type = type;
+            HasAttachment = hasAttachment;
+            Status = status;
+            UsersGroup = userGroup;
+            Summary = summary;
+            Detail = detail;
+            CreatedDate = createdDate;
+            LastModified = lastModified;
 
+        }
     }
 }

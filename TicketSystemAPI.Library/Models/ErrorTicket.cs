@@ -10,13 +10,18 @@ namespace TicketSystemAPI.Library.Models
 {
     public class ErrorTicket : Ticket, IErrorHelper
     {
-        public string Code { get;  set; }
+        public int Code { get;  set; }
 
         public string Phrase { get; set; }
 
         public string Message { get; set; }
         public bool CanAutoAssign { get; set; }
-        int IErrorHelper.Code { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ErrorTicket(int ticketNumber, string creator, string type, bool hasAttachment, string status, string userGroup, string summary, string detail, DateTime createdDate, string lastModified)
+            :base(ticketNumber, creator, type, hasAttachment, status, userGroup, summary, detail, createdDate, lastModified)
+        {
+           
+        }
 
         public void ProcessError()
         {
