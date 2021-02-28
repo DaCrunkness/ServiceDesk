@@ -27,8 +27,6 @@ namespace TicketSystemAPI.Controllers
             string user = User.Identity.GetUserName();
             string group = GetUserGroup(user);
             SubmitTicket(error, user, group);
-            int i = 0;
-            // create error ticket with error
         }
     }
 }

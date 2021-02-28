@@ -12,7 +12,7 @@ namespace TicketSystemAPI.Library.Models
         public string Team { get; set; }
         public string Agency { get; set; }
         public string Role { get; set; }
-        public UserTicket(int ticketNumber, string creator, string type, bool hasAttachment, string status, string userGroup, string summary, string detail, DateTime createdDate, string lastModified)
+        public UserTicket()
         {
 
         }

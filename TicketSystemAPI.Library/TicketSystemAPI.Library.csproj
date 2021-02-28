@@ -50,6 +50,7 @@
     <Compile Include="DataAccess\FileData.cs" />
     <Compile Include="DataAccess\TicketData.cs" />
     <Compile Include="DataAccess\UserData.cs" />
+    <Compile Include="DataAccess\UTData.cs" />
     <Compile Include="Helpers\IErrorHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\ITicketHelper.cs" />
