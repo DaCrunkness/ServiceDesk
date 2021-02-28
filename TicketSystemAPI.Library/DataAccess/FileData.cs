@@ -10,6 +10,7 @@ namespace TicketSystemAPI.Library.DataAccess
 {
     public class FileData
     {
+        private const string TICKET_TYPE = "File";
         public static int AddFileToDatabase(string fileName, string fileEXT, string filePath, string fileType)
         {
             FileModel data = new FileModel
@@ -37,5 +38,46 @@ namespace TicketSystemAPI.Library.DataAccess
 
             return SqlDataAccess.LoadData<FileModel>(sql);
         }
+
+
+        private static List<FileTicket> LoadTicketNumberByType(string type)
+        {
+            string sql = $"select TicketNumber, Creator, WillAutoAssign, Summary, Detail, CreateDate from dbo.Tickets where Type = { type };";
+
+            return SqlDataAccess.LoadData<FileTicket>(sql);
+        }
+
+        private static string GetTicketNumber()
+        {
+            var data = LoadTicketNumberByType(TICKET_TYPE);
+            int number = data.Count + 1;
+            string ticketNumber = $"F{number}";
+            return ticketNumber;
+        }
+
+        //private static int SubmitTicket(ErrorModel error, string creator, string userGroup)
+        //{
+
+        //    ErrorTicket data = new ErrorTicket
+        //    {
+        //        TicketNumber = GetTicketNumber(),
+        //        Creator = creator,
+        //        Type = TICKET_TYPE,
+        //        WillAutoAssign = CanAutoAssign(error.Code),
+        //        UsersGroup = userGroup,
+        //        Summary = error.Phrase,
+        //        Detail = error.Message,
+        //        LastModified = DateTime.Now.ToString(),
+        //        Code = error.Code,
+        //        ErrorType = error.Type,
+        //        Phrase = error.Phrase,
+        //        Message = error.Message
+        //    };
+
+
+        //    string sql = @"insert into dbo.Tickets (TicketNumber, Creator, Type, HasAttachment, WillAutoAssign, Status, UsersGroup, Summary, Detail, LastModified)
+        //                                 values (@TicketNumber, @Creator, @Type, @HasAttachment @WillAutoAssign, @Status, @UsersGroup, @Summary, @Detail, @LastModified);";
+        //    return SqlDataAccess.SaveData(sql, data);
+        //}
     }
 }

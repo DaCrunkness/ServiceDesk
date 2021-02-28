@@ -13,7 +13,7 @@ namespace TicketSystemAPI.Library.Helpers
         string Type { get; set; }
         string Phrase { get; set; }
         string Message { get; set; }
-        bool CanAutoAssign { get; set; }
+        bool WillAutoAssign { get; set; }
         void ProcessError();
     }
 }

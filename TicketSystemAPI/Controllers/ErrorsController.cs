@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,6 +18,17 @@ namespace TicketSystemAPI.Controllers
         public void CreateErrorType(ErrorModel model)
         {
             AddError(model.Code, model.Type, model.Phrase, model.Message, model.WillAutoAssign);
+        }
+
+        [Route("ReportError/{code}")]
+        public void ReportNewError(int code)
+        {
+            var error = GetError(code);
+            string user = User.Identity.GetUserName();
+            string group = GetUserGroup(user);
+            SubmitTicket(error, user, group);
+            int i = 0;
+            // create error ticket with error
         }
     }
 }

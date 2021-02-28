@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TicketSystemAPI.Library.Helpers
 {
-    public interface TicketHelper
+    public static class TicketHelper
     {
+        private enum TicketType { User, Error, File };
+
         
     }
 }

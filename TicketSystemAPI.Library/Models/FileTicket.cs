@@ -15,7 +15,6 @@ namespace TicketSystemAPI.Library.Models
         public string FileType { get; set; }
         public string Source { get; set; }
         public FileTicket(int ticketNumber, string creator, string type, bool hasAttachment, string status, string userGroup, string summary, string detail, DateTime createdDate, string lastModified)
-            : base(ticketNumber, creator, type, hasAttachment, status, userGroup, summary, detail, createdDate, lastModified)
         {
 
         }

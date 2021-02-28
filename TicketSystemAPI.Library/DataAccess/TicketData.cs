@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TicketSystemAPI.Library.AbstractBases;
 using TicketSystemAPI.Library.Internal.DataAccess;
 using TicketSystemAPI.Library.Models;
 
@@ -38,7 +39,15 @@ namespace TicketSystemAPI.Library.DataAccess
 
             return SqlDataAccess.LoadData<TicketModel>(sql);
         }
-        
+
+
+        public static List<Ticket> LoadTickets(string userGroup)
+        {
+            string sql = $"select TicketNumber, Creator, Summary, Detail, CreateDate from dbo.Tickets where UsersGroup = { userGroup };";
+
+            return SqlDataAccess.LoadData<Ticket>(sql);
+        }
+
         public static List<TicketModel> GetNumberOfTickets()
         {
             string sql = @"select COUNT(TicketNumber) from dbo.Tickets;"; // Try againg with stored procedures

@@ -8,24 +8,46 @@ using TicketSystemAPI.Library.Helpers;
 
 namespace TicketSystemAPI.Library.Models
 {
-    public class ErrorTicket : Ticket, IErrorHelper
+    public class ErrorTicket : Ticket //, IErrorHelper
     {
         public int Code { get;  set; }
+        public string  ErrorType { get; set; }
 
         public string Phrase { get; set; }
 
         public string Message { get; set; }
-        public bool CanAutoAssign { get; set; }
 
-        public ErrorTicket(int ticketNumber, string creator, string type, bool hasAttachment, string status, string userGroup, string summary, string detail, DateTime createdDate, string lastModified)
-            :base(ticketNumber, creator, type, hasAttachment, status, userGroup, summary, detail, createdDate, lastModified)
+        public ErrorTicket()
         {
            
+        }
+
+        public ErrorTicket(ErrorModel error)
+        {
+            Code = error.Code;
+            ErrorType = error.Type;
+            Phrase = error.Phrase;
+            Message = error.Message;
+           //WillAutoAssign = CanAutoAssign();
+        }
+
+        public ErrorTicket(ErrorModel error, Ticket ticket)
+        {
+            Code = error.Code;
+            ErrorType = error.Type;
+            Phrase = error.Phrase;
+            Message = error.Message;
+            //WillAutoAssign = CanAutoAssign();
         }
 
         public void ProcessError()
         {
             throw new NotImplementedException();
         }
+
+        //public override bool CanAutoAssign()
+        //{
+        //    return true;
+        //}
     }
 }

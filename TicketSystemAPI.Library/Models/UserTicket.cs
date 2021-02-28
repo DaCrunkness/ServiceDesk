@@ -13,7 +13,6 @@ namespace TicketSystemAPI.Library.Models
         public string Agency { get; set; }
         public string Role { get; set; }
         public UserTicket(int ticketNumber, string creator, string type, bool hasAttachment, string status, string userGroup, string summary, string detail, DateTime createdDate, string lastModified)
-            : base(ticketNumber, creator, type, hasAttachment, status, userGroup, summary, detail, createdDate, lastModified)
         {
 
         }

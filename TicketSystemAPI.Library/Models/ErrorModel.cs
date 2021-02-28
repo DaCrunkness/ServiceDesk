@@ -12,6 +12,6 @@ namespace TicketSystemAPI.Library.Models
         public string Type { get; set; }
         public string Phrase { get; set; }
         public string Message { get; set; }
-        public bool WillAutoAssign { get; set; }
+        public string WillAutoAssign { get; set; }
     }
 }
