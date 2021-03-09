@@ -328,7 +328,7 @@ namespace TicketSystemAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            int recordsCreated = CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.Email, model.Group);
+            CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.Email, model.Group);
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);

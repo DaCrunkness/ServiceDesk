@@ -36,15 +36,15 @@ namespace TicketSystemAPI.Controllers
         [Route("CreateDefaultTicket")]
         public void CreateTicket()
         {
-            int recordsCreated = SubmitTicket();
-            int i = 1;
+            //int recordsCreated = SubmitTicket();
+            //int i = 1;
         }
 
 
         [Route("CreateTicket")]
         public void CreateTicket(TicketModel model)
         {
-            int recordsCreated = SubmitTicket(User.Identity.GetUserName(), model.Summary, model.Detail);
+            //int recordsCreated = SubmitTicket(User.Identity.GetUserName(), model.Summary, model.Detail);
         }
 
         [Route("GetAllTickets")]

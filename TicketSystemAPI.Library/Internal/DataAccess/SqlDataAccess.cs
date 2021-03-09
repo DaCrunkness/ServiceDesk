@@ -9,26 +9,53 @@ namespace TicketSystemAPI.Library.Internal.DataAccess
 {
     internal class SqlDataAccess
     {
-        public static string GetConnectionString(string connectionName = "TicketSystemDB")
+
+        public string GetConnectionString(string name)
         {
-            return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
-
-        public static List<T> LoadData<T>(string sql)
+        public List<T> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
         {
-            using (IDbConnection connection = new SqlConnection(GetConnectionString()))
+            string connectionString = GetConnectionString(connectionStringName);
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query<T>(sql).ToList();
+                List<T> rows = connection.Query<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return rows;
             }
         }
 
-        public static int SaveData<T>(string sql, T data)
+        public void SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
         {
-            using (IDbConnection connection = new SqlConnection(GetConnectionString()))
+            string connectionString = GetConnectionString(connectionStringName);
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Execute(sql, data);
+                connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+
             }
         }
+
+
+        //public static string GetConnectionString(string connectionName = "TicketSystemDB")
+        //{
+        //    return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+        //}
+
+
+        //public static List<T> LoadData<T>(string sql)
+        //{
+        //    using (IDbConnection connection = new SqlConnection(GetConnectionString()))
+        //    {
+        //        return connection.Query<T>(sql).ToList();
+        //    }
+        //}
+
+        //public static int SaveData<T>(string sql, T data)
+        //{
+        //    using (IDbConnection connection = new SqlConnection(GetConnectionString()))
+        //    {
+        //        return connection.Execute(sql, data);
+        //    }
+        //}
     }
 }

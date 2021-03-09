@@ -4,7 +4,7 @@
     [Creator] NVARCHAR(256) NOT NULL, 
     [UsersGroup] NVARCHAR(256) NOT NULL,
     [Type] NVARCHAR(256) NOT NULL, 
-    [Status] NVARCHAR(256) NOT NULL, 
+    [Status] NVARCHAR(256) NOT NULL DEFAULT 'Open', 
     [Summary] NVARCHAR(500) NOT NULL, 
     [Detail] NVARCHAR(MAX) NOT NULL, 
     [CreateDate] DATETIME2 NOT NULL DEFAULT getutcdate(), 

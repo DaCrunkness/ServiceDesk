@@ -55,6 +55,7 @@
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\ITicketHelper.cs" />
     <Compile Include="Helpers\TicketHelper.cs" />
+    <Compile Include="Internal\DataAccess\DBStructure.cs" />
     <Compile Include="Internal\DataAccess\SqlDataAccess.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\ErrorTicket.cs" />

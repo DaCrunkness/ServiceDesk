@@ -9,27 +9,28 @@ using static TicketSystemAPI.Library.DataAccess.UserData;
 namespace TicketSystemAPI.Controllers
 {
     [RoutePrefix("api/User")]
+    [Authorize]
     public class UserController : ApiController
     {
         [HttpPost]
         [Route("CreateAccount")]
         public void CreateAccount(UserModel model)
         {
-            int recordsCreated = CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, model.UsersGroup);
+            CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, model.UsersGroup);
         }
 
         [HttpGet]
         [Route("ViewProfile")]
-        public UserModel ViewProfile(string Id)
+        public UserModel ViewProfile()
         {
-            return GetUserById(Id).First();
+           return GetUserById(User.Identity.GetUserName());
         }
 
         [HttpGet]
         [Route("ViewGroup")]
-        public List<UserModel> ViewGroup(string group)
+        public void ViewGroup(string group)
         {
-            return GetUserGroup(group);
+            // return GetUserGroup(group);
         }
 
         [HttpGet]

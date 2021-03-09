@@ -12,9 +12,10 @@ namespace TicketSystemAPI.Library.DataAccess
     {
         private const string TICKET_TYPE = "User";
 
-        public static int SubmitTicket(string creator, string summary, string details)
+        public static void SubmitTicket(string creator, string summary, string details)
         {
-            UserTicket data = new UserTicket() 
+            SqlDataAccess sql = new SqlDataAccess();
+            var p = new
             {
                 TicketNumber = GetTicketNumber(),
                 Creator = creator,
@@ -24,31 +25,32 @@ namespace TicketSystemAPI.Library.DataAccess
                 Detail = details,
                 LastModified = DateTime.Now.ToString()
             };
+            sql.SaveData(DBStructure.SUBMIT_TICKET, p, DBStructure.DBNAME);
+            
+        }
 
-            string sql = @"insert into dbo.Tickets (TicketNumber, Creator, UsersGroup, Type, Status, Summary, Detail, LastModified)
-                                         values (@TicketNumber, @Creator, @UsersGroup, @Type, @Status, @Summary, @Detail, @LastModified);";
-            return SqlDataAccess.SaveData(sql, data);
+        private static List<ErrorTicket> LoadTicketsByType(string type)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+            var p = new { Type = type };
+            var output = sql.LoadData<ErrorTicket, dynamic>(DBStructure.TICKETS_LOADBYTYPE, p, DBStructure.DBNAME);
+            return output;
         }
 
         private static string GetTicketNumber()
         {
-            var data = LoadTicketNumberByType(TICKET_TYPE);
+            var data = LoadTicketsByType(TICKET_TYPE);
             int number = data.Count + 1;
             string ticketNumber = $"U{number}";
             return ticketNumber;
         }
 
-        private static List<UserTicket> LoadTicketNumberByType(string type)
-        {
-            string sql = $"select TicketNumber from dbo.Tickets where Type = '{ type }';";
-            return SqlDataAccess.LoadData<UserTicket>(sql);
-        }
-
         public static string GetUserGroup(string emailAddress)
         {
-            string sql = $"select UsersGroup from dbo.Users where EmailAddress = '{ emailAddress }';";
-            List<UserModel> users = SqlDataAccess.LoadData<UserModel>(sql);
-            return users.First().UsersGroup;
+            SqlDataAccess sql = new SqlDataAccess();
+            var p = new { EmailAddress = emailAddress };
+            var output = sql.LoadData<UserModel, dynamic>(DBStructure.USER_GETUSERGROUP, p, DBStructure.DBNAME);
+            return output.First().UsersGroup;
         }
     }
 }
