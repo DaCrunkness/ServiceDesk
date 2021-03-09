@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TicketSystemAPI.Models;
 using static TicketSystemAPI.Library.DataAccess.UTData;
 
 namespace TicketSystemAPI.Controllers
@@ -13,10 +14,10 @@ namespace TicketSystemAPI.Controllers
     [RoutePrefix("api/UserTickets")]
     public class UserTicketController : ApiController
     {
-        [Route("CreateTicket/{summary}/{details}")]
-        public void CreateTicket(string summary, string details)
+        [Route("CreateTicket")]
+        public void CreateTicket(UserTicket ticket)
         {
-            SubmitTicket(User.Identity.GetUserName(), summary, details);
+            SubmitTicket(User.Identity.GetUserName(), ticket.Summary, ticket.Detail);
         }
     }
 }

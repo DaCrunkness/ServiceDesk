@@ -192,6 +192,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TicketModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserTicket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

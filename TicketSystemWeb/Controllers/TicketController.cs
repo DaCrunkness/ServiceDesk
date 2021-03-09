@@ -11,7 +11,7 @@ namespace TicketSystemWeb.Controllers
     [Authorize]
     public class TicketController : Controller
     {
-        private APIHelper apiHelper = new APIHelper();
+        private APIHelper _apiHelper;
         // GET: Ticket
         public ActionResult Index()
         {
@@ -20,10 +20,10 @@ namespace TicketSystemWeb.Controllers
 
         // POST: Ticket/Create
         [HttpPost]
-        public async Task<ActionResult> CreateTicket(TicketModel model)
+        public async Task<ActionResult> CreateTicket(UserTicket ticket)
         {
-            model.Creator = User.Identity.GetUserName();
-            using (HttpResponseMessage response = await apiHelper.ApiClient.PostAsJsonAsync("api/Ticket/CreateTicket", model))
+            ReadyHelper();
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("api/UserTickets/CreateTicket", ticket))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -35,6 +35,12 @@ namespace TicketSystemWeb.Controllers
                     throw new Exception(response.ReasonPhrase);
                 }
             }
+        }
+
+        private void ReadyHelper()
+        {
+            _apiHelper = new APIHelper();
+            _apiHelper.AddRequestHeaders(Session["accessToken"].ToString());
         }
 
     }
