@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spError_LookUp]
-	@CODE INT
+	@Code INT
 AS
 BEGIN
 	SET NOCOUNT ON;

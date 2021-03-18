@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spError_CanAutoAssign]
-	@CODE INT
+	@Code INT
 AS
 BEGIN
 	SET NOCOUNT ON;
