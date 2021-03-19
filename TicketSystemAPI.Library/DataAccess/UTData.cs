@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketSystemAPI.Library.AbstractBases;
 using TicketSystemAPI.Library.Internal.DataAccess;
 using TicketSystemAPI.Library.Models;
 
@@ -29,11 +30,11 @@ namespace TicketSystemAPI.Library.DataAccess
             
         }
 
-        private static List<ErrorTicket> LoadTicketsByType(string type)
+        private static List<UserTicket> LoadTicketsByType(string type)
         {
             SqlDataAccess sql = new SqlDataAccess();
             var p = new { Type = type };
-            var output = sql.LoadData<ErrorTicket, dynamic>(DBStructure.TICKETS_LOADBYTYPE, p, DBStructure.DBNAME);
+            var output = sql.LoadData<UserTicket, dynamic>(DBStructure.TICKETS_LOADBYTYPE, p, DBStructure.DBNAME);
             return output;
         }
 
@@ -51,6 +52,14 @@ namespace TicketSystemAPI.Library.DataAccess
             var p = new { EmailAddress = emailAddress };
             var output = sql.LoadData<UserModel, dynamic>(DBStructure.USER_GETUSERGROUP, p, DBStructure.DBNAME);
             return output.First().UsersGroup;
+        }
+
+        public static List<TicketDisplayModel> GetMyTickets(string creator)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+            var p = new { Creator = creator };
+            var output = sql.LoadData<TicketDisplayModel, dynamic>(DBStructure.TICKETS_GETMINE, p, DBStructure.DBNAME);
+            return output;
         }
     }
 }

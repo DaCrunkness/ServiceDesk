@@ -20,7 +20,7 @@ namespace TicketSystemWeb.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("EFData", throwIfV1Schema: false)
+            : base("TicketsEF", throwIfV1Schema: false)
         {
         }
 

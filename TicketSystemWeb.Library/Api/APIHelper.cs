@@ -32,7 +32,7 @@ namespace TicketSystemWeb.Library.Api
 
         private void InitializeClient()
         {
-            string api = ConfigurationManager.AppSettings["api"];
+            string api = ConfigurationManager.AppSettings["apiLive"];
 
             _apiClient = new HttpClient();
             _apiClient.BaseAddress = new Uri(api);
@@ -50,7 +50,7 @@ namespace TicketSystemWeb.Library.Api
                 new KeyValuePair<string, string>("password", password)
             });
 
-            using (HttpResponseMessage response = await _apiClient.PostAsync("/Token", data))
+            using (HttpResponseMessage response = await _apiClient.PostAsync("token", data))
             {
                 if (response.IsSuccessStatusCode)
                 {

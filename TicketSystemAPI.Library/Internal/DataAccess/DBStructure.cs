@@ -8,7 +8,7 @@ namespace TicketSystemAPI.Library.Internal.DataAccess
 {
     internal class DBStructure
     {
-        public const string DBNAME = "TicketSystemDB";
+        public const string DBNAME = "LiveTickets";
         public const string USER_LOOKUP = "dbo.spUserLookup";
         public const string USER_CREATION = "dbo.spUserCreation";
         public const string USER_LOADUSERS = "dbo.spUserLoad";
@@ -21,5 +21,6 @@ namespace TicketSystemAPI.Library.Internal.DataAccess
         public const string SUBMIT_TICKET = "dbo.spSubmitTicket";
         public const string TICKETS_LOADALL= "dbo.spTickets_LoadAll";
         public const string TICKETS_LOADBYTYPE= "dbo.spTickets_LoadByType";
+        public const string TICKETS_GETMINE= "dbo.spTickets_GetMine";
     }
 }
